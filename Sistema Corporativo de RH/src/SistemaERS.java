@@ -173,7 +173,7 @@ public class SistemaERS {
 
     // Etapa de Inovação  |
     //                    V
-    public void mostarHistoricoAlocacao(int recursoId) {
+    public void mostrarHistoricoAlocacao(int recursoId) {
         boolean encontrou = false;
 
         for (MovimentacaoRecurso m : historicoMovimentacoes) {
