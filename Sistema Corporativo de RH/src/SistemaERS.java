@@ -71,17 +71,31 @@ public class SistemaERS {
     }
 
     public void devolverRecurso(int recursoId){
-        // cada alocacao
+
+        Alocacao alocacaoEncontrada = null;
+
+        // Encontrar alocacao
         for (Alocacao a : alocacoes) {
+            if (a.getRecursoId() == recursoId){
+                alocacaoEncontrada = a;
+                return;
+            }
 
-            if (a.getRecursoId() == recursoId) {
-                    alocacoes.remove(a);
-                    a.set
-                    System.out.println("Recurso devolvido com sucesso!");
-                    return;
+            if (alocacaoEncontrada == null){
+                System.out.println("Alocação não encontrada.");
+                return;
+            }
+
+            for (Recurso r : recursos){
+                if (r.getId() == recursoId){
+                    r.setDisponivel(true);
+                    break;
                 }
+            }
 
-            System.out.println("Alocação não encontrado!");
+            alocacoes.remove(alocacaoEncontrada);
+            System.out.println("Recurso devolvido com sucesso!");
+
         }
     }
 
