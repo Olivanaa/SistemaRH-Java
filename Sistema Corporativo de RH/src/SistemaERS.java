@@ -21,6 +21,7 @@ public class SistemaERS {
     ArrayList<Colaborador> colaboradores = new ArrayList<>();
     ArrayList<Recurso> recursos = new ArrayList<>();
     ArrayList<Alocacao> alocacoes = new ArrayList<>();
+    ArrayList<MovimentacaoRecurso> historicoMovimentacoes = new ArrayList<>();
 
     public void cadastrarColaborador(Colaborador colaborador){
         Colaborador novoColaborador = new Colaborador( colaborador.id, colaborador.nome, colaborador.cargo, colaborador.salario, colaborador.ativo, colaborador.dataDeAdmissao);
@@ -56,6 +57,17 @@ public class SistemaERS {
                        // Adiciona na lista alocações o new Alocacao
                        alocacoes.add(new Alocacao(colaboradorId, recursoId, null, "Alugado"));
 
+                       // Adiciona no histórico
+                       historicoMovimentacoes.add(
+                               new MovimentacaoRecurso(
+                                       r.getId(),
+                                       r.getNomeDoRecurso(),
+                                       "ALOCADO",
+                                       colaborador.getNome(),
+                                       dataFormatada
+                               )
+                       );
+
                        // Mudar a disponibilidade para false
                        r.setDisponivel(false);
 
@@ -89,11 +101,24 @@ public class SistemaERS {
             for (Recurso r : recursos){
                 if (r.getId() == recursoId){
                     r.setDisponivel(true);
+
+                    // Adiciona nos históricos
+                    historicoMovimentacoes.add(
+                            new MovimentacaoRecurso(
+                                    r.getId(),
+                                    r.getNomeDoRecurso(),
+                                    "DEVOLVIDO",
+                                    "N/A",
+                                    dataFormatada
+                            )
+                    );
                     break;
                 }
             }
 
+            // Remove de alocacoes
             alocacoes.remove(alocacaoEncontrada);
+
             System.out.println("Recurso devolvido com sucesso!");
 
         }
@@ -123,7 +148,7 @@ public class SistemaERS {
         }
     }
 
-    public void buscarColaboradorPeloNome(String colaboradorNome){
+    public void buscarColaboradorPeloNome(String colaboradorNome ){
         for (Colaborador c : colaboradores){
             String nome = c.nome;
             if (nome.equals(colaboradorNome)){
@@ -132,5 +157,39 @@ public class SistemaERS {
             }
         }
         System.out.println("Colaborador não encontrado.");
+    }
+
+    public void promoverColaborador(String colaboradorNome, String novoCargo, double novoSalario){
+        for (Colaborador c : colaboradores){
+            if (c.getNome().equals(colaboradorNome)){
+                c.promover(novoCargo, novoSalario);
+                System.out.println("Colaborar promovido com sucesso!");
+                return;
+            }
+        }
+        System.out.println("Colaborador: "+ colaborador.getNome() + " não encontrado!");
+    }
+
+
+    // Etapa de Inovação  |
+    //                    V
+    public void mostarHistoricoAlocacao(int recursoId) {
+        boolean encontrou = false;
+
+        for (MovimentacaoRecurso m : historicoMovimentacoes) {
+            if (m.getRecursoId() == recursoId) {
+                System.out.println(
+                        "Recurso: " + m.getNomeRecurso()
+                                + " | Movimentação: " + m.getTipoMovimentacao()
+                                + " | Colaborador: " + m.getColaboradorNome()
+                                + " | Data/Hora: " + m.getDataHora()
+                );
+                encontrou = true;
+            }
+        }
+
+        if (!encontrou) {
+            System.out.println("Nenhum histórico encontrado para esse recurso.");
+        }
     }
 }
