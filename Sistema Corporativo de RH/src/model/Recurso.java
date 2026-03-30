@@ -1,18 +1,24 @@
+package model;
+
+import enums.TipoCategoria;
+
 public class Recurso {
 
     // só pode ser alocado se tiver disponivel
 
-    int id;
-    String nomeDoRecurso;
-    String categoria;
-    boolean disponivel;
-    double valorEstimado;
+    private int id;
+    private String nomeDoRecurso;
+    private TipoCategoria categoria;
+    private boolean disponivel;
+    private double valorEstimado;
 
-    public Recurso(int id, String nomeDoRecurso, String categoria, boolean disponivel, double valorEstimado) {
-        this.id = id;
+    private static int proximoId = 1;
+
+    public Recurso(String nomeDoRecurso, TipoCategoria categoria, double valorEstimado) {
+        this.id = proximoId++;
         this.nomeDoRecurso = nomeDoRecurso;
         this.categoria = categoria;
-        this.disponivel = disponivel;
+        this.disponivel = true;
         this.valorEstimado = valorEstimado;
     }
 
@@ -28,7 +34,7 @@ public class Recurso {
         this.disponivel = disponivel;
     }
 
-    public String getCategoria() {
+    public TipoCategoria getCategoria() {
         return categoria;
     }
 
@@ -42,6 +48,6 @@ public class Recurso {
 
     public boolean podeSerAlocado() {
 
-        return disponivel && valorEstimado <= 5000;
+        return valorEstimado <= 5000;
     }
 }

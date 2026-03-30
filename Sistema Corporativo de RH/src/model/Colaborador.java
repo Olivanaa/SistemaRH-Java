@@ -1,18 +1,22 @@
+package model;
+
 import java.time.LocalDate;
 
 public class Colaborador {
 
     // Um colaborador recém-admitido sempre começa como ativo = true.
 
-    int id;
-    String nome;
-    String cargo;
-    double salario;
-    boolean ativo;
-    LocalDate dataDeAdmissao;
+    private int id;
+    private String nome;
+    private String cargo;
+    private double salario;
+    private boolean ativo;
+    private LocalDate dataDeAdmissao;
 
-    public Colaborador (int id, String nome, String cargo, double salario, boolean ativo, LocalDate dataDeAdmissao){
-        this.id = id;
+    private static int proximoId = 1;
+
+    public Colaborador (String nome, String cargo, double salario, LocalDate dataDeAdmissao){
+        this.id = proximoId++;
         this.nome = nome;
         this.cargo = cargo;
         this.salario = salario;
