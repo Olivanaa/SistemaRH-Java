@@ -25,7 +25,7 @@ Desenvolver o primeiro módulo funcional do **ERS (Employee Resource System)** c
 
 ## 🧱 Diagrama de classes
 
-
+![Diagrama de Classes](DiagramaClasses.jpg)
 ---
 
 ## ⚙️ Regras de Negócio Implementadas
