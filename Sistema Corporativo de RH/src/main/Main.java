@@ -125,22 +125,48 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.print("ID do colaborador: ");
-                    int colaboradorId = scanner.nextInt();
+                    sistemaERS.mostrarColaboradores();
 
-                    System.out.print("ID do recurso: ");
-                    int recursoId = scanner.nextInt();
-                    scanner.nextLine();
+                    int colaboradorId = -1; // Inicializa com um valor inválido
+
+                    while (colaboradorId == -1) {
+                        System.out.print("ID do colaborador: ");
+
+                        try {
+                            colaboradorId = Integer.parseInt(scanner.nextLine()); // Tenta converter a entrada
+                        } catch (NumberFormatException e) {
+                            System.out.println("Entrada inválida! Digite apenas números.");
+                        }
+                    }
+
+                    sistemaERS.mostrarRecursos();
+
+                    int recursoId = -1; // Inicializa com um valor inválido
+                    while (recursoId == -1) {
+                        System.out.print("ID do recurso: ");
+                        try {
+                            recursoId = Integer.parseInt(scanner.nextLine()); // Tenta converter a entrada
+                        } catch (NumberFormatException e) {
+                            System.out.println("Entrada inválida! Digite apenas números.");
+                        }
+                    }
 
                     sistemaERS.alocarRecurso(colaboradorId, recursoId);
                     break;
 
                 case 4:
-                    System.out.print("ID do recurso a devolver: ");
-                    int recursoDevolver = scanner.nextInt();
-                    scanner.nextLine();
+                    sistemaERS.mostrarRecursos();
 
-                    sistemaERS.devolverRecurso(recursoDevolver);
+                    int recursoC = -1;
+                    while (recursoC == -1) {
+                        System.out.print("ID do recurso a devolver: ");
+                        try {
+                            recursoC = Integer.parseInt(scanner.nextLine());
+                        } catch (NumberFormatException e) {
+                            System.out.println("Entrada inválida! Digite apenas números.");
+                        }
+                    }
+                    sistemaERS.devolverRecurso(recursoC);
                     break;
 
                 case 5:
@@ -158,6 +184,8 @@ public class Main {
                     sistemaERS.exibirColaboradorPeloNome(nomeBusca);
                     break;
                 case 8:
+                    sistemaERS.mostrarRecursos();
+
                     System.out.println("Digite o id do recurso: ");
                     int idRecurso = scanner.nextInt();
                     scanner.nextLine();

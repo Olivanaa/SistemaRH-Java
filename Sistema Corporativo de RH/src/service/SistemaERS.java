@@ -105,7 +105,7 @@ public class SistemaERS {
         }
 
         if (alocacaoEncontrada == null){
-            System.out.println("Alocação não encontrada.");
+            System.out.println("Recurso não foi alugado ainda ou não encontrado nas alocações.");
             return;
         }
 
