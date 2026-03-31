@@ -18,6 +18,7 @@ Desenvolver o primeiro módulo funcional do **ERS (Employee Resource System)** c
 - Alocação de recursos
 - Devolução de recursos
 - Busca de colaboradores
+- Promoção de colaboradores
 - Controle de disponibilidade
 - Histórico de movimentações
 
@@ -25,7 +26,7 @@ Desenvolver o primeiro módulo funcional do **ERS (Employee Resource System)** c
 
 ## 🧱 Diagrama de classes
 
-![Diagrama de Classes](DiagramaClasses.jpg)
+![Diagrama de Classes](diagramaCp1.drawio.png)
 ---
 
 ## ⚙️ Regras de Negócio Implementadas
@@ -86,6 +87,7 @@ Além do enunciado, o projeto recebeu melhorias de arquitetura:
 - Geração automática de IDs
 - Validação de entradas no menu com `try-catch`
 - Submenu dinâmico para categorias
+- Separação entre método de busca e método de exibição de colaborador
 
 ---
 
