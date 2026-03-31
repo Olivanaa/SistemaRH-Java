@@ -16,9 +16,8 @@ public class SistemaERS {
     //Lista de alocações X
     //Metodos de manipulacao (cadastrar v, alocar v, devolver v, buscar v, exibir v)
 
-    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-
-    String dataFormatada = LocalDateTime.now().format(formato);
+    DateTimeFormatter formatoDataHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private ArrayList<Colaborador> colaboradores = new ArrayList<>();
     private ArrayList<Recurso> recursos = new ArrayList<>();
@@ -33,7 +32,7 @@ public class SistemaERS {
                 " | Cargo: " + colaborador.getCargo() +
                 " | Salário: " + colaborador.getSalario() +
                 (colaborador.isAtivo()? " | Ativo" : " | Inativo") +
-                " | Data de Admissao: " + colaborador.getDataDeAdmissao());
+                " | Data de Admissao: " + colaborador.getDataDeAdmissao().format(formatoData));
     }
 
     public void cadastrarRecurso(Recurso recurso){
@@ -160,34 +159,39 @@ public class SistemaERS {
 
         System.out.println("Nossos colaboradores:");
         for (Colaborador c: colaboradores){
-            System.out.println(c.getId() + ", " + c.getNome() + ", cargo: " + c.getCargo() + ", salário: " + c.getSalario() + ", Data de Admissão: " + c.getDataDeAdmissao());
+            System.out.println("ID: " + c.getId() +  " | Nome: "  + c.getNome() + " | Cargo: " + c.getCargo() + " | Salário: " + c.getSalario() + " | Data de Admissao: "  + c.getDataDeAdmissao().format(formatoData));
+
         }
     }
 
-    public void buscarColaboradorPeloNome(String colaboradorNome ){
+
+    public void exibirColaboradorPeloNome(String colaboradorNome){
         for (Colaborador c : colaboradores){
             String nome = c.getNome().toLowerCase();
-            System.out.println(nome);
-            System.out.println(colaboradorNome.toLowerCase());
             if (nome.equals(colaboradorNome.toLowerCase())){
                 String status = c.isAtivo() ? "Ativo" : "Inativo";
 
-                System.out.println("Colaborador encontrado: " + c.getNome() + ", " + c.getCargo()+ ", " + status + ", " + c.getDataDeAdmissao());
+                System.out.println("Colaborador encontrado: " + c.getNome() + " | Cargo: " + c.getCargo()+ " | " + status + " | Data de Admissao: " + c.getDataDeAdmissao().format(formatoData));
                 return;
             }
         }
         System.out.println("Colaborador não encontrado.");
     }
 
-    public void promoverColaborador(String colaboradorNome, String novoCargo, double novoSalario){
+    public Colaborador buscarColaboradorPeloNome(String nomeColaborador){
         for (Colaborador c : colaboradores){
-            if (c.getNome().equals(colaboradorNome)){
-                c.promover(novoCargo, novoSalario);
-                System.out.println("Colaborar promovido com sucesso!");
-                return;
+            String nome = c.getNome().toLowerCase();
+            if (nome.equals(nomeColaborador.toLowerCase())){
+                return c;
             }
         }
-        System.out.println("Colaborador não encontrado!");
+        return null;
+    }
+
+
+    public void promoverColaborador(Colaborador c, String novoCargo, double novoSalario){
+        c.promover(novoCargo, novoSalario);
+        System.out.println("Colaborador promovido com sucesso!");
     }
 
 
@@ -202,7 +206,7 @@ public class SistemaERS {
                         "Recurso: " + m.getRecurso().getNomeDoRecurso()
                                 + " | Movimentação: " + m.getTipoMovimentacao()
                                 + " | Colaborador: " + m.getColaborador().getNome()
-                                + " | Data/Hora: " + m.getDataHora()
+                                + " | Data/Hora: " + m.getDataHora().format(formatoDataHora)
                 );
                 encontrou = true;
             }

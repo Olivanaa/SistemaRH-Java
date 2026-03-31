@@ -13,6 +13,7 @@ public class ExibirMenu {
         System.out.println("6 - Mostrar recursos");
         System.out.println("7 - Buscar colaborador pelo nome");
         System.out.println("8 - Mostrar histórico de recurso");
+        System.out.println("9 - Promover Colaborador");
         System.out.println("0 - Sair");
         System.out.print("Escolha uma opção: ");
     }

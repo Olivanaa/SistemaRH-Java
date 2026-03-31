@@ -58,8 +58,7 @@ public class Main {
                     String cargo = scanner.nextLine();
 
                     System.out.print("Salário: ");
-                    double salario = scanner.nextDouble();
-
+                    double salario = Double.parseDouble(scanner.nextLine());
 
                     Colaborador novoColaborador = new Colaborador(
                             nome, cargo, salario, LocalDate.now()
@@ -156,12 +155,36 @@ public class Main {
                     System.out.print("Digite o nome do colaborador: ");
                     String nomeBusca = scanner.nextLine();
 
-                    sistemaERS.buscarColaboradorPeloNome(nomeBusca);
+                    sistemaERS.exibirColaboradorPeloNome(nomeBusca);
                     break;
                 case 8:
                     System.out.println("Digite o id do recurso: ");
                     int idRecurso = scanner.nextInt();
+                    scanner.nextLine();
                     sistemaERS.mostrarHistoricoAlocacao(idRecurso);
+                    break;
+                case 9:
+                    System.out.print("Digite o nome do colaborador: ");
+                    String nomeColaborador = scanner.nextLine();
+
+                    Colaborador c = sistemaERS.buscarColaboradorPeloNome(nomeColaborador);
+
+                    if (c == null) {
+                        System.out.println("Colaborador não encontrado.");
+                        break;
+                    }
+
+                    System.out.println("Colaborador encontrado: " +
+                            c.getNome() + " | Cargo atual: " + c.getCargo() + " | Salario atual: " + c.getSalario());
+
+                    System.out.print("Novo cargo: ");
+                    String novoCargo = scanner.nextLine();
+
+                    System.out.print("Novo salário: ");
+                    double novoSalario = Double.parseDouble(scanner.nextLine());
+
+                    sistemaERS.promoverColaborador(c, novoCargo, novoSalario);
+                    break;
                 case 0:
                     System.out.println("Encerrando o sistema...");
                     break;
