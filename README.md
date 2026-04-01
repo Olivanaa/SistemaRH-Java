@@ -39,11 +39,11 @@ Desenvolver o primeiro módulo funcional do **ERS (Employee Resource System)** c
 ### 💻 Recurso
 - Todo recurso inicia como disponível
 - IDs gerados automaticamente
-- Recursos acima de **R$ 5000,00** exigem autorização especial
 - Recursos indisponíveis não podem ser alocados
 
 ### 📦 Alocação
 - Um recurso só pode ser alocado se estiver disponível
+- Recursos acima de **R$ 5000,00** exigem autorização especial
 - Ao alocar:
   - status muda para indisponível
   - movimentação é registrada
